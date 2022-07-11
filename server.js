@@ -2,14 +2,16 @@
 const express = require('express');
 const db = require('./config/connection');
 const routes = require('./routes');
+const mongoose = require('mongoose');
 
-const cwd = process.cwd();
+// const cwd = process.cwd();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-app.use((erq, res, next) => {
+app.use((req, res, next) => {
     console.log(`${req.method} requested on endpoint ${req.path}`);
+    next();
 });
 
 app.use(express.urlencoded({ extended: true }));
