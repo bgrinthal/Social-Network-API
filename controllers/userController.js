@@ -30,27 +30,27 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
   // Update user by ID
-  updateUser({ params, body }, res) {
-    User.findOneAndUpdate({ _id: params.id }, body, { new: true, runValidators: true })
-      .then(dbUserData => {
-        !dbUserData
+  updateUser(req, res) {
+    User.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true, runValidators: true })
+      .then(userData => {
+        !userData
           ? res.status(404).json({ message: 'No user found with this id' })
-          : res.json(dbUserData);
+          : res.json(userData);
       })
       .catch(err => res.status(400).json(err));
   },
   // Delete user by ID
   deleteUser(req, res) {
     User.findOneAndDelete({ _id: req.params.userId })
-      .then(dbUserData => {
-        !dbUserData
+      .then(userData => {
+        !userData
           ? res.status(404).json({ message: 'No user found with this id' })
           : User.updateMany(
-            { _id: { $in: dbUserData.friends } },
-            { $pull: { friends: params.userId } }
+            { _id: { $in: userData.friends } },
+            { $pull: { friends: req.params.userId } }
           )
             .then(() => {
-              Thought.deleteMany({ username: dbUserData.username })
+              Thought.deleteMany({ username: userData.username })
                 .then(() => {
                   res.json({ message: "Successfully deleted user" });
                 })
