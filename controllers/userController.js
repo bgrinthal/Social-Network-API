@@ -31,7 +31,7 @@ module.exports = {
   },
   // Update user by ID
   updateUser(req, res) {
-    User.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true, runValidators: true })
+    User.findOneAndUpdate({ _id: req.params.userId }, req.body, { new: true, runValidators: true })
       .then(userData => {
         !userData
           ? res.status(404).json({ message: 'No user found with this id' })
