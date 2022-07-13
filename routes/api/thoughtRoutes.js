@@ -1,8 +1,8 @@
 const router = require('express').Router();
 
 const {
-    getAllThoughts,
-    getThoughtById,
+    getThoughts,
+    getUserThoughts,
     createThought,
     updateThought,
     deleteThought,
@@ -13,13 +13,13 @@ const {
     // /api/thoughts
 router
     .route('/')
-    .get(getAllThoughts)
+    .get(getThoughts)
     .post(createThought);
 
     // /api/thoughts/:thoughtId
 router
     .route('/:id')
-    .get(getThoughtById)
+    .get(getUserThoughts)
     .put(updateThought)
     .delete(deleteThought);
 

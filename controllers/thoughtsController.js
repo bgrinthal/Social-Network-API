@@ -3,7 +3,7 @@ const { User, Thought, Reaction } = require('../models');
 module.exports = {
 
     // Get all thoughts
-    getAllThoughts(req, res) {
+    getThoughts(req, res) {
         Thought.find({})
             .populate({ path: 'reactions', select: '-__v' })
             .select('-__v')
@@ -15,7 +15,7 @@ module.exports = {
     },
 
     // Get thoughts by ID
-    getThoughtById(req, res) {
+    getUserThoughts(req, res) {
         Thought.findOne({ _id: req.params.id })
             .populate({ path: 'reactions', select: '-__v' })
             .select('-__v')
