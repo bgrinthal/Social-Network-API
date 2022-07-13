@@ -10,21 +10,21 @@ const {
     deleteReaction
 } = require('../../controllers/thoughtsController');
 
-    // /api/thoughts
+// /api/thoughts
 router
     .route('/')
     .get(getThoughts)
     .post(createThought);
 
-    // /api/thoughts/:thoughtId
+// /api/thoughts/:thoughtId
 router
-    .route('/:id')
+    .route('/:thoughtId')
     .get(getUserThoughts)
     .put(updateThought)
     .delete(deleteThought);
 
-        // /api/thoughts/:thoughtId/reactions
-router.route('/:thoughtId/reactions/')
+// /api/thoughts/:thoughtId/reactions
+router.route('/:thoughtId/reactions')
     .post(addReaction)
     .delete(deleteReaction)
 
