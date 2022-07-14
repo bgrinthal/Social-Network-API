@@ -67,18 +67,18 @@ module.exports = {
       { $addToSet: { friends: req.params.friendId } },
       { new: true, runValidators: true }
     )
-      .then(dbUserData => {
-        !dbUserData
+      .then(userData => {
+        !userData
           ? res.status(404).json({ message: 'No user found with this userId' })
           : User.findOneAndUpdate(
             { _id: req.params.friendId },
             { $addToSet: { friends: req.params.userId } },
             { new: true, runValidators: true }
           )
-            .then(dbUserData2 => {
-              !dbUserData2
+            .then(userData2 => {
+              !userData2
                 ? res.status(404).json({ message: 'No user found with this friendId' })
-                : res.json(dbUserData);
+                : res.json(userData);
             })
             .catch(err => res.json(err));
       })
@@ -91,16 +91,16 @@ module.exports = {
       { $pull: { friends: req.params.friendId } },
       { new: true, runValidators: true }
     )
-      .then(dbUserData => {
-        !dbUserData
+      .then(userData => {
+        !userData
           ? res.status(404).json({ message: 'No user found with this userId' })
           : User.findOneAndUpdate(
             { _id: req.params.friendId },
             { $pull: { friends: req.params.userId } },
             { new: true, runValidators: true }
           )
-            .then(dbUserData2 => {
-              !dbUserData2
+            .then(userData2 => {
+              !userData2
                 ? res.status(404).json({ message: 'No user found with this friendId' })
                 : res.json({ message: 'Successfully deleted the friend' });
             })
