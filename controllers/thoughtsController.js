@@ -67,13 +67,13 @@ module.exports = {
 
     // Delete thought by id
     deleteThought(req, res) {
-        Thought.findOneAndDelete({ _id: req.params.id })
+        Thought.findOneAndDelete({ _id: req.params.thoughtId })
             .then((thoughtData) => {
                 !thoughtData
                     ? res.status(404).json({ message: 'No thought found with this id' })
                     : User.findOneAndUpdate(
                         { username: thoughtData.username },
-                        { $pull: { thoughts: req.params.id } }
+                        { $pull: { thoughts: req.params.thoughtId } }
                     )
                         .then(() => {
                             res.json({ message: 'Successfully deleted the thought' });
