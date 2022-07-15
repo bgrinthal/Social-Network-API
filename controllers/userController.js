@@ -84,6 +84,7 @@ module.exports = {
       })
       .catch(err => res.json(err));
   },
+
   // Delete friend 
   deleteFriend(req, res) {
     User.findOneAndUpdate(

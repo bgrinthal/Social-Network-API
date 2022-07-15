@@ -52,7 +52,7 @@ module.exports = {
     // Update thought
     updateThought(req, res) {
         Thought.findOneAndUpdate(
-            { _id: req.params.id },
+            { _id: req.params.thoughtId },
             req.body,
             { new: true }
         )
